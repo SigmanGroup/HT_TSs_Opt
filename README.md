@@ -1,4 +1,4 @@
-# TS_Int_HT_Featurization_Workflow
+# High-Throughput_Optimization_and_Featurization_of_TSs_and_Catalytic_Intermediates
 This repository contains scripts for high-throughput generation, optimization, and featurization of TSs and catalytic cycle intermediates, along with scripts for MLR modeling and Excel spreadsheet with input data.
 
 ## Dependencies
