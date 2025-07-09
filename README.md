@@ -1,17 +1,17 @@
 # High-Throughput Optimization and Featurization of TSs and Catalytic Cycle Intermediates
-This repository contains scripts for high-throughput generation, optimization, and featurization of TSs and catalytic cycle intermediates, along with scripts for MLR modeling and Excel spreadsheet with input data.
+This repository contains scripts for high-throughput generation, optimization, and featurization of TSs and catalytic cycle intermediates, along with scripts for MLR modeling and Excel spreadsheets with input data.
 
 ## Dependencies
 This workflow relies of published computational tools, including [AaronTools](https://aarontools.readthedocs.io/en/latest/index.html)<sup>1</sup> and [Molassembler](https://github.com/qcscine/molassembler)<sup>2</sup>. See the links for detailed installation guides.
 
 ## Step 1: Templates Generation
-With the following specified in a .bashrc file (or similar)
+The following must be specified in a .bashrc file (or similar)
 
 ```
 export PYTHONPATH=/home/$USER/AARON_TOOLS/:$PYTHONPATH
 export PATH=$PATH:/home/$USER/AARON_TOOLS/AaronTools/bin
 ```
-A Bash script like this may be used to iterate through a .txt file containing the names of the ligands to map onto the templates (here, IntC_R.xyz and IntC_S.xyz):
+A Bash script like this may then be used to iterate through a .txt file containing the names of the ligands to map onto the templates (here, IntC_R.xyz and IntC_S.xyz):
 
 ```
 #!/bin/bash
@@ -83,7 +83,32 @@ done
 echo "All files have been processed."
 ```
 
+## Step 2: Conformational Sampling
+
+The following Bash script is used to iterate through a text file containing the names of the ligands in the library. It calls a python script (`conformer_generator.py`) to run Molassembler (provided in the direcotry "Step_2_Conformational_Sampling"). This script was adapted from [code](https://github.com/lcmd-epfl/molassembler_script) written by Dr Rubén Laplaza (LCMD, EPFL) and has been published.<sup>3</sup> `conformer_generator.py` may be adapted to change the maximum number of conformers generated (`max_n_confs`, 250 has been used as default) and the atom indices of the Ni and Br atoms (`return list(set(shells + list(range(20,21))))`). The `radius_adjacency` function may also be adapted depending on the bond lengths in the Ni atom first coordination sphere (in the initial .xyz templates).
+
+```
+#!/bin/bash
+# Check if a filename argument is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 filename.txt"
+    exit 1
+fi
+
+# Loop through each line in the provided text file
+while IFS= read -r file_id
+do
+    python conformer_generator.py "${file_id}_TSRE_R.xyz"
+    python conformer_generator.py "${file_id}_TSRE_S.xyz"
+done < "$1"
+```
+
+## Step 3: Constrained Optimization
+
+
+
 ## Citations
 1. Ingman, V. M., Schaefer, A. J., Andreola, L. R. & Wheeler, S. E. QChASM: Quantum chemistry automation and structure manipulation. _WIREs Comput. Mol. Sci._ **11**, e1510 (2021)
 2. Sobez, J.-G. & Reiher, M. Molassembler: Molecular Graph Construction, Modification, and Conformer Generation for Inorganic and Organic Molecules. _J. Chem. Inf. Model._ **60**, 3884–3900 (2020)
+3. Laplaza, R., Sobez, J.-G., Wodrich, M. D., Reiher, M. & Corminboeuf, C. The (not so) simple prediction of enantioselectivity – a pipeline for high-fidelity computations. _Chem. Sci._ **13**, 6858–6864 (2022)
 
