@@ -366,7 +366,7 @@ The PCM/*ω*B97X-3c energies are extracted from the `.out` files with the `get_S
 ## Step 7: Properties Computation and Extraction
 
 
-## Citations
+## References
 1. Ingman, V. M., Schaefer, A. J., Andreola, L. R. & Wheeler, S. E. QChASM: Quantum chemistry automation and structure manipulation. _WIREs Comput. Mol. Sci._ **11**, e1510 (2021).
 2. Sobez, J.-G. & Reiher, M. Molassembler: Molecular Graph Construction, Modification, and Conformer Generation for Inorganic and Organic Molecules. _J. Chem. Inf. Model._ **60**, 3884–3900 (2020).
 3. Laplaza, R.; Wodrich, M. D.; Corminboeuf, C. Overcoming the Pitfalls of Computing Reaction Selectivity from Ensembles of Transition States. _J. Phys. Chem. Lett._ **15**, 7363–7370 (2024). https://doi.org/10.1021/acs.jpclett.4c01657.
