@@ -331,7 +331,7 @@ done < "$1"
 
 Finally, the thermal correction to the Gibbs Free energy is extracted from the `.log` files selected by mARC with the `get_Gibbs_corr.py` Python script.
 
-### Step 6: Single-point Energy Computations
+## Step 6: Single-point Energy Computations
 
 `.inp` files for Orca 5.0<sup>7</sup> are generated with the following Bash script, which calls the `o4wb3c` Fortran [executable](https://github.com/grimme-lab/wB97X-3c):
 
@@ -363,7 +363,7 @@ The value of the dielectric constant and of the refractive index should be adjus
 The PCM/*ω*B97X-3c energies are extracted from the `.out` files with the `get_SPC.py` Python script (available in the "Step_6_SPC" folder). Gibbs free energies (G(T)_spc(Hartree)) are then calculated as the sum of the PCM/*ω*B97X-3c electronic energies and the spGFN2-XTB–level thermal corrections.
 
 
-### Step 7: Properties Computation and Extraction
+## Step 7: Properties Computation and Extraction
 
 
 ## Citations
