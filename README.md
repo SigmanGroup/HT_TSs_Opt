@@ -323,7 +323,7 @@ Coordinates are then extracted from the converged `.log` files using the `printX
 
 To filter out structures that have not optimized to a first-order saddle point, the `g16-ifreq.py` Python script is executed. The script filters out the `.log` files with multiple imaginary frequencies or an imaginary frequency outside a user-defined range. Based on the manual inspection of multiple TS conformers for Case Study 1, the range specified for **TSRC** was -110 cm<sup>-1</sup> < _freq_ < -25 cm<sup>-1</sup>, while for **TSRE** it was -230 cm<sup>-1</sup> < _freq_ < -35 cm<sup>-1</sup>.
 
-The following Bash script is then used to run [mARC](https://github.com/lcmd-epfl/marc)<sup>3</sup> and select unique conformers within a 10 kcal/mol energetic window (based on the spGFN2-xTB electronic energies). Note that, to have all the `.xyz` files in the right format for mARC, the Python scripts `get_xTB_E.py` and `add_energies_xlsx.py` (see the "Step_5_Filtering" folder) are run prior to mARC. 
+The following Bash script is then used to run [mARC](https://github.com/lcmd-epfl/marc)<sup>3</sup> (version 0.1.10) and select unique conformers within a 10 kcal/mol energetic window (based on the spGFN2-xTB electronic energies). Note that, to have all the `.xyz` files in the right format for mARC, the Python scripts `get_xTB_E.py` and `add_energies_xlsx.py` (see the "Step_5_Filtering" folder) are run prior to mARC. 
 
 ```
 #!/bin/bash
@@ -343,7 +343,7 @@ done < "$1"
 
 Finally, the thermal correction to the Gibbs Free energy is extracted from the `.log` files selected by mARC with the `get_Gibbs_corr.py` Python script.
 
-## Step 6: Single-point Energy Computations
+## Step 6: Single-Point Energy Computations
 
 `.inp` files for Orca 5.0<sup>9</sup> are generated with the following Bash script, which calls the `o4wb3c` Fortran [executable](https://github.com/grimme-lab/wB97X-3c):
 
@@ -377,7 +377,7 @@ The PCM/*ω*B97X-3c<sup>10</sup> energies are extracted from the `.out` files wi
 
 ## Step 7: Properties Computation and Extraction
 
-The following `gauss_input.com` template is used to generate input files for properties computations, which, for computational efficiency, are performed with the same _xtb_-Gaussian approach as Step 4. The solvent should be adapted based on the reaction.
+The following `gauss_input.com` template is used to generate input files for the computation of molecular descriptors, which, for computational efficiency, are performed with the same _xtb_-Gaussian approach as Step 4. The solvent should be adapted based on the reaction.
 
 ```
 %chk=file_name.chk
@@ -407,6 +407,16 @@ file_name
 0 2
 ```
 
+The `get_properties_HT_Worflow_spGFN2-xTB.ipynb` Jupyter notebook (located in the "Step_7_Get_Properties" folder) is used to collect most of the descriptors. It was adapted from work published by Coley, Paton, Sigman _et al._<sup>11</sup> hosted on [GitHub](https://github.com/SigmanGroup/Get_Properties). Please see the link for detailed instructions.
+
+The `GetParameters.py` Python script is also used to extract molecular features (specifically, dispersion descriptors,<sup>12</sup> spin densities, and atomic solvent accessible surface areas) using [ᴍᴏʀғᴇᴜs](https://digital-chemistry-laboratory.github.io/morfeus/) that are not implemented in the _Get Properties_ notebook. All the relevant Bash and Python scripts are localed in the the "Step_7_Get_Properties" folder. The workflow is exectuted as follows:
+
+1. Run `prepare_Morfeus.sh` to separate all the `.log` (and their corresponding `.xyz` files) into distinct directories based on the template (_i.e._, the name of the ligand);
+2. Create an `Atom_indices.csv` file, containing the indices of atoms called N1, N2, C1, C2, C4, C5, R1, R2, X1, X2, Ni, Br, C1s, C2s, H1s (see Figure S2 of the ESI) for each template. `Atom_indices.csv` can also be used together with `atom_map.py` to create the input `.xlsx` file for `get_properties_HT_Worflow_spGFN2-xTB.ipynb`;
+3. Execute `run_morfeus_script.sh`: it calls `Change_labels.py` to update the atom indices (based on what is listed in `Atom_indices.csv`) inside `GetParameter.py`.
+4. `GetParameter_{template}.py` scripts are generated and executed inside the directory corresponding to each template. `combine_morfeus_results.py` can then be used to combine the separate output `.csv` files into one `.xlsx` file (_e.g._, `TSRE_Morfeus_Results.xlsx`);
+5. Parametes collected with `GetParameter.py` can then be combined with those collected _via_ `get_properties_HT_Worflow_spGFN2-xTB.ipynb` and post-processed inside the notebook (remember to add G(T)_spc(Hartree) calculated in Step 6);
+6. `remove_columns.py` can then be used to remove undesired descriptors (_e.g._, '_stdev' or '_range' values) from the final output `.xlsx` file. The **TSRC**, **Int**, and **TSRE** features can also be combined into one spreadsheet with `combine_features.py`.
 
 
 ## References
@@ -420,4 +430,6 @@ file_name
 8. Neugebauer, H.; Badorf, B.; Ehlert, S.; Hansen, A.; Grimme, S. High-Throughput Screening of Spin States for Transition Metal Complexes with Spin-Polarized Extended Tight-Binding Methods. _J. Comput. Chem._ **44**, 2120–2129 (2023).
 9. Neese, F. Software Update: The ORCA Program System-Version 5.0. _WIREs Comput. Mol. Sci._ **12** (2022).
 10. Müller, M.; Hansen, A.; Grimme, S. ωB97X-3c: A Composite Range-Separated Hybrid DFT Method with a Molecule-Optimized Polarized Valence Double-ζ Basis Set. _J. Chem. Phys._ **158**, 014103 (2023).
+11. Haas, B. C.; Hardy, M. A.; Sowndarya S. V., S.; Adams, K.; Coley, C. W.; Paton, R. S.; Sigman, M. S. Rapid prediction of conformationally-dependent DFT-level descriptors using graph neural networks for carboxylic acids and alkyl amines. _Digit. Discov._ **4**, 222–233 (2025).
+12. Pollice, R.; Chen, P. A universal quantitative descriptor of the dispersion interaction potential. _Angew. Chem. Int. Ed._, **58**, 9758–9769 (2019).
 
