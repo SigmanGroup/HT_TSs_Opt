@@ -377,6 +377,37 @@ The PCM/*ω*B97X-3c<sup>10</sup> energies are extracted from the `.out` files wi
 
 ## Step 7: Properties Computation and Extraction
 
+The following `gauss_input.com` template is used to generate input files for properties computations, which, for computational efficiency, are performed with the same _xtb_-Gaussian approach as Step 4. The solvent should be adapted based on the reaction.
+
+```
+%chk=file_name.chk
+# external="xtb-gaussian -P 10 --charge 0 --uhf 1 --spinpol --tblite"
+  freq=noraman
+
+file_name
+
+0 2 here
+
+--Link1--
+%chk=file_name.chk
+# external="xtb-gaussian -P 10 --charge 0 --uhf 1 --spinpol --tblite"
+  geom=check pm6 scf=yqc scrf=(pcm,solvent=n,n-DiMethylAcetamide)
+
+file_name
+
+0 2
+
+--Link1--
+%chk=file_name.chk
+# external="xtb-gaussian -P 10 --charge 0 --uhf 1 --spinpol --tblite"
+  geom=check guess=read volume polar pop=hirshfeld prop=efg scrf=(pcm,solvent=n,n-DiMethylAcetamide)
+
+file_name
+
+0 2
+```
+
+
 
 ## References
 1. Ingman, V. M., Schaefer, A. J., Andreola, L. R. & Wheeler, S. E. QChASM: Quantum chemistry automation and structure manipulation. _WIREs Comput. Mol. Sci._ **11**, e1510 (2021).
