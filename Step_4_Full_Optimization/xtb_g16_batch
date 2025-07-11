@@ -1,0 +1,32 @@
+#!/bin/bash
+export PATH=$PATH:/uufs/chpc.utah.edu/common/home/u6055669/software/xtb-gaussian:/uufs/chpc.utah.edu/sys/installdir/r8/xtb/6.6.1/bin/
+
+function is_bin_in_path {
+  builtin type -P "$1" &> /dev/null
+}
+
+is_bin_in_path xtb  && echo "Found xtb." || echo "No xtb found. Exit!" 
+is_bin_in_path xtb-gaussian  && echo "Found xtb-gaussian." || echo "No xtb-gaussian found. Exit!" 
+ulimit -s unlimited
+export OMP_STACKSIZE=700M
+export OMP_NUM_THREADS=8,1
+export MKL_NUM_THREADS=8
+module purge
+module load gaussian16
+module load intel intel-mkl
+module load xtb/6.6.1
+
+file=$1
+WORKDIR=$PWD
+mkdir $WORKDIR/${file%".com"}_output/
+export TMPDIR=$WORKDIR/${file%".com"}_output/
+export GAUSS_SCRDIR=${TMPDIR}
+cp $WORKDIR/${file} $TMPDIR/
+cd $TMPDIR
+echo ${file}
+
+g16 < ${file} > ${file%".com"}.log 
+
+cp $TMPDIR/${file%".com"}.log $WORKDIR
+rm -rf $TMPDIR
+

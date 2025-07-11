@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH --partition=sigman-shared-np
+#SBATCH --account=sigman-np
+#SBATCH --time=72:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=52
+hostname
+env | grep SLURM
+cat TSRE.txt | awk '{print $1}' | parallel -j $SLURM_NTASKS ./xtb_g16_batch
+
