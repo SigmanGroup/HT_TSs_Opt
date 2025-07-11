@@ -419,11 +419,15 @@ The `GetParameters.py` Python script is also used to extract molecular features 
 6. `remove_columns.py` can then be used to remove undesired descriptors (_e.g._, '_stdev' or '_range' values) from the final output `.xlsx` file. The **TSRC**, **Int**, and **TSRE** features can also be combined into one spreadsheet with `combine_features.py`.
 
 
+## Step 8: Multivariate Linear Regression Modeling
+
+
+
 ## References
 1. Ingman, V. M., Schaefer, A. J., Andreola, L. R. & Wheeler, S. E. QChASM: Quantum chemistry automation and structure manipulation. _WIREs Comput. Mol. Sci._ **11**, e1510 (2021).
 2. Sobez, J.-G. & Reiher, M. Molassembler: Molecular Graph Construction, Modification, and Conformer Generation for Inorganic and Organic Molecules. _J. Chem. Inf. Model._ **60**, 3884–3900 (2020).
 3. Laplaza, R.; Wodrich, M. D.; Corminboeuf, C. Overcoming the Pitfalls of Computing Reaction Selectivity from Ensembles of Transition States. _J. Phys. Chem. Lett._ **15**, 7363–7370 (2024).
-4. Lau, S. H.; Borden, M. A.; Steiman, T. J.; Wang, L. S.; Parasram, M.; Doyle, A. G. Ni/Photoredox-Catalyzed Enantioselective Cross-Electrophile Coupling of Styrene Oxides with Aryl Iodides. _J. Am. Chem. Soc._ **143**, 15873–15881 (2021)
+4. Lau, S. H.; Borden, M. A.; Steiman, T. J.; Wang, L. S.; Parasram, M.; Doyle, A. G. Ni/Photoredox-Catalyzed Enantioselective Cross-Electrophile Coupling of Styrene Oxides with Aryl Iodides. _J. Am. Chem. Soc._ **143**, 15873–15881 (2021).
 5. Turro, R. F.; Wahlman, J. L. H.; Tong, Z. J.; Chen, X.; Yang, M.; Chen, E. P.; Hong, X.; Hadt, R. G.; Houk, K. N.; Yang, Y.-F.; Reisman, S. E. Mechanistic Investigation of Ni-Catalyzed Reductive Cross-Coupling of Alkenyl and Benzyl Electrophiles. _J. Am. Chem. Soc._ **145**, 14705–14715 (2023).
 6. Laplaza, R., Sobez, J.-G., Wodrich, M. D., Reiher, M. & Corminboeuf, C. The (not so) simple prediction of enantioselectivity – a pipeline for high-fidelity computations. _Chem. Sci._ **13**, 6858–6864 (2022).
 7. Frisch, M.; Trucks, G.; Schlegel, H.; Scuseria, G.; Robb, M.; Cheeseman, J.; Montgomery, J.; Vreven, T.; Kudin, K.; Burant, J.; Millam, J.; Iyengar, S.; Tomasi, J.; Barone, V.; Mennucci, B.; Cossi, M.; Scalmani, G.; Rega, N.; Petersson, G.; Nakatsuji, H.; Hada, M.; Ehara, M.; Toyota, K.; Fukuda, R.; Hasegawa, J.; Ishida, M.; Nakajima, T.; Honda, Y.; Kitao, O.; Nakai, H.; Klene, M.; Li, X.; Knox, J.; Hratchian, H.; Cross, J.; Bakken, V.; Adamo, C.; Jaramillo, J.; Gomperts, R.; Stratmann, R.; Yazyev, O.; Austin, A.; Cammi, R.; Pomelli, C.; Ochterski, J.; Ayala, P.; Morokuma, K.; Voth, G.; Salvador, P.; Dannenberg, J.; Zakrzewski, V.; Dapprich, S.; Daniels, A.; Strain, M.; Farkas, O.; Malick, D.; Rabuck, A.; Raghavachari, K.; Foresman, J.; Ortiz, J.; Cui, Q.; Baboul, A.; Clifford, S.; Cioslowski, J.; Stefanov, B.; Liu, G.; Liashenko, A.; Piskorz, P.; Komaromi, I.; Martin, R.; Fox, D.; Keith, T.; Laham, A.; Peng, C.; Nanayakkara, A.; Challacombe, M.; Gill, P.; Johnson, B.; Chen, W.; Wong, M.; Gonzalez, C.; Pople, J. Gaussian 16, Revision C.01 (2016).
