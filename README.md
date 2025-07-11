@@ -2,7 +2,7 @@
 This repository contains scripts for high-throughput generation, optimization, and featurization of TSs and catalytic cycle intermediates, along with scripts for MLR modeling and the Excel spreadsheets with input data.
 
 ## Dependencies
-This workflow relies of published computational tools, including [AaronTools](https://aarontools.readthedocs.io/en/latest/index.html),<sup>1</sup> [Molassembler](https://github.com/qcscine/molassembler),<sup>2</sup> and [mARC](https://github.com/lcmd-epfl/marc).<sup>3</sup> See the links for detailed installation guides.
+This workflow relies on published computational tools, including [AaronTools](https://aarontools.readthedocs.io/en/latest/index.html),<sup>1</sup> [Molassembler](https://github.com/qcscine/molassembler),<sup>2</sup> and [mARC](https://github.com/lcmd-epfl/marc).<sup>3</sup> See the links for detailed installation guides.
 
 ## Step 1: Templates Generation
 
