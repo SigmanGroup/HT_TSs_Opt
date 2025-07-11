@@ -1,0 +1,21 @@
+#!/bin/bash
+module load xtb/6.6.1
+file=$1
+
+ulimit -s unlimited
+export OMP_STACKSIZE=30GB
+export OMP_NUM_THREADS=16,1
+export OMP_MAX_ACTIVE_LEVELS=1
+export MKL_NUM_THREADS=16
+
+WORKDIR=$PWD
+mkdir $WORKDIR/${file%".xyz"}_output
+cp $WORKDIR/${file} $WORKDIR/${file%".xyz"}_output/
+cp $WORKDIR/constraints.inp $WORKDIR/${file%".xyz"}_output/
+cd $WORKDIR/${file%".xyz"}_output/
+
+xtb --input constraints.inp ${file} --opt --charge 0 --uhf 1
+
+cp xtbopt.xyz $WORKDIR/${file%".xyz"}_opt.xyz
+
+rm -rf $WORKDIR/${file%".xyz"}_output
