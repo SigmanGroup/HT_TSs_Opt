@@ -159,6 +159,10 @@ rm -rf $WORKDIR/${file%".xyz"}_output
 
 Once optimization is complete, `file_opt.xyz` structures are renamed to `file.xyz`.
 
+### Note on reactions with vinyl bromide substrates
+
+Molassembler may occasionally fail at conserving the (_E_)-stereochemistry of the substrate when a graph projecting back into 3D coordinates, incorrectly generating structures with (_Z_)-stereochemistry. To address this issue, for reactions **C**, **E**, and **G** `max_n_confs` inside `conformer_generator.py` was increased to 500 (rather than 250). Following constrained optimization of all the structures, the Python script `classify_dihedral.py` was used to filter out geometries where the alkene was in the incorrect (_Z_)-configuration.
+
 ## Step 4: Full Optimization
 
 The following Bash script is used to generate `.com` files for all the optimized `file.xyz` structures. This script takes as input the name of the directory where the `.xyz` files are located, and requires the template file `gauss_input.com` to be located in the working directory.
