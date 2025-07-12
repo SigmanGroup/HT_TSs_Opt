@@ -9,7 +9,7 @@ This workflow relies on published computational tools, including [AaronTools](ht
 ### Ligand and Int/TSRE Template Structures
 The "NN_Ligands" folder contains a `.cdxml` file with 2D representations of all the ligands investigated in this paper. Their corresponding SMILES strings are listed in `NN_Ligands.csv`, while the `.xyz` geometries used as input for AaronTools are in `XYZ_Structures.zip`.
 
-Template geometries for `IntC_R.xyz`/`IntC_S.xyz` and `TSRE_R.xyz`/`TSRE_S.xyz` were taken from Doyle _et al._<sup>4</sup> and Reisman _et al._<sup>5</sup> and are located in the "Step_1_Templates_Generation" folder. 
+Template geometries for `IntC_R.xyz`/`IntC_S.xyz` and `TSRE_R.xyz`/`TSRE_S.xyz` were taken from Doyle _et al._<sup>4</sup> and Reisman _et al._<sup>5</sup> and are located in the "Step_1_Templates_Generation" folder. See Step 3 for **TSRC** structures generation.
 
 ### AaronTools
 
@@ -161,7 +161,7 @@ Once optimization is complete, `file_opt.xyz` structures are renamed to `file.xy
 
 ### Note on reactions with vinyl bromide substrates
 
-Molassembler may occasionally fail at conserving the (_E_)-stereochemistry of the substrate when a graph projecting back into 3D coordinates, incorrectly generating structures with (_Z_)-stereochemistry. To address this issue, for reactions **C**, **E**, and **G** `max_n_confs` inside `conformer_generator.py` was increased to 500 (rather than 250). Following constrained optimization of all the structures, the Python script `classify_dihedral.py` was used to filter out geometries where the alkene was in the incorrect (_Z_)-configuration.
+Molassembler may occasionally fail at conserving the (_E_)-stereochemistry of the substrate when a graph is projected back into 3D coordinates, incorrectly generating structures with (_Z_)-stereochemistry. To address this issue, for reactions **C**, **E**, and **G** `max_n_confs` inside `conformer_generator.py` was increased to 500 (rather than 250). Following constrained optimization of all the structures, the Python script `classify_dihedral.py` was used to filter out geometries where the alkene was in the incorrect (_Z_)-configuration, resulting in the desired _ca._ 250 structures (per diastereomeric species) with the (_E_)-configuration.
 
 ## Step 4: Full Optimization
 
