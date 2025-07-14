@@ -418,6 +418,8 @@ The `GetParameters.py` Python script is also used to extract molecular features 
 5. Parametes collected with `GetParameter.py` can then be combined with those collected _via_ `get_properties_HT_Worflow_spGFN2-xTB.ipynb` and post-processed inside the notebook (remember to add G(T)_spc(Hartree) calculated in Step 6);
 6. `remove_columns.py` can then be used to remove undesired descriptors (_e.g._, '_stdev' or '_range' values) from the final output `.xlsx` file. The **TSRC**, **Int**, and **TSRE** features can also be combined into one spreadsheet with `combine_features.py`.
 
+As an illustrative example, output `.xlsx` and `.csv` files for the featurization of the **TSRE** structures of reaction **H**, and corresponding `.xyz` files, are provided in the folder "Liu_JACS_2024_TSRE_Get_Properties" .
+
 
 ## Step 8: Multivariate Linear Regression Modeling
 
