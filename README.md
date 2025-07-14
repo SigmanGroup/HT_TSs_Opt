@@ -95,7 +95,7 @@ echo "All files have been processed."
 
 ## Step 2: Conformational Sampling
 
-The following Bash script is used to iterate through a text file containing the names of the ligands in the library. It calls a python script (`conformer_generator.py`) to run Molassembler (provided in the folder "Step_2_Conformational_Sampling"). This script was adapted from [code](https://github.com/lcmd-epfl/molassembler_script) written by Dr Rubén Laplaza (LCMD, EPFL) and has been published.<sup>6</sup>
+The following Bash script is used to iterate through a text file containing the names of the ligands in the library. It calls a Python script (`conformer_generator.py`) to run Molassembler (provided in the folder "Step_2_Conformational_Sampling"). This script was adapted from [code](https://github.com/lcmd-epfl/molassembler_script) written by Dr Rubén Laplaza (LCMD, EPFL) and has been published.<sup>6</sup>
 
 `conformer_generator.py` may be adapted to change the maximum number of conformers generated (`max_n_confs`, 250 has been used as default) and the indices of the Ni and Br atoms (`return list(set(shells + list(range(20,21))))`). The `radius_adjacency` function may also be adapted depending on the bond lengths in the Ni atom first coordination sphere (in the initial `.xyz` templates).
 
