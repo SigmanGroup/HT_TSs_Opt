@@ -423,9 +423,26 @@ As an illustrative example, output `.xlsx` and `.csv` files for the featurizatio
 
 ## Step 8: Multivariate Linear Regression Modeling
 
-The folder "Step_8_Modeling" contains the Python script `nested_CV.py` used for feature selection, which was performed _via_ repeated, stratified, nested _k_-fold cross-validation. This script was written based on the code by Doyle _et al._<sup>4</sup> available [elsewhere](https://pubs.acs.org/doi/suppl/10.1021/jacs.1c08105/suppl_file/ja1c08105_si_001.txt) and requires a `.xlsx` input file with the following columns: "Structure", "Class", "ee", "DeltaDeltaG", followed by all the parameters. Details of the cross-validation scheme are provided in the Supporting Information. Notably, the exhaustive combinatorial search of features performed in the inner loop is computationally very expensive. To reduce the number of input features (and hence the cost), the Boruta algorithm<sup>13</sup> implemented in a Jupyter notebook (feature_curation.ipynb) written by our group and hosted on [GitHub](https://github.com/SigmanGroup/python-modeling) was used. Alternatively, a modified version of `nested_CV.py` (called `RF_nested_CV.py`, available in the folder "Step_8_Modeling") was used. Herein, inside the `exhaustive_search` function, a random forest is trained on the data to estimate feature importance. Features with importance ≤ 0.01 are filtered out, and the combinatorial search is performed on the remaining features. Models were also searched _via_ bidirectional stepwise selection using our groups's modeling workflow (the `Mattlab_modeling_v6.0.0.ipynb` Jupyter notebook hosted on [GitHub]([url](https://github.com/SigmanGroup/python-modeling))). 
+The folder "Step_8_Modeling" contains the Python script `nested_CV.py` used for feature selection, which was performed _via_ repeated, stratified, nested _k_-fold cross-validation. This script was written based on the code by Doyle _et al._<sup>4</sup> available [elsewhere](https://pubs.acs.org/doi/suppl/10.1021/jacs.1c08105/suppl_file/ja1c08105_si_001.txt) and requires a `.xlsx` input file with the following columns: "Structure", "Class", "ee", and "DeltaDeltaG", followed by all the parameters (see the "Benchmarking" folder for examples).
 
-Combinations of features identified with these approaches were further evaluated _via_ a 5×2 cross-validation scheme performed with the `5_2_CV.py` Python script, which was also written based on the code by Doyle _et al._<sup>4</sup> This script requires a `.xlsx` file with the data (∆∆*G*<sup>‡</sup> values and descriptors) and a `.txt` file with the specific combination of features as input (_e.g._, TSRE_xTB: η_Boltz, %Vbur_C1s_2.0Å_Boltz, %Vbur_C2s_4.0Å_Boltz if the sheet containing parameters extracted from **TSRE** is called TSRE_xTB).
+Details of the cross-validation scheme are provided in the Supporting Information. Notably, the exhaustive combinatorial search of features performed in the inner loop is computationally very expensive. To reduce the number of input features (and hence the cost), the Boruta algorithm<sup>13</sup> implemented in a Jupyter notebook (`feature_curation.ipynb`) written by our group and hosted on [GitHub](https://github.com/SigmanGroup/python-modeling) was used. Alternatively, a modified version of `nested_CV.py` (called `RF_nested_CV.py`, available in the folder "Step_8_Modeling") was used. Herein, inside the `exhaustive_search` function, a random forest is trained to estimate feature importance. Features with importance ≤ 0.01 are filtered out, and the combinatorial search is performed on the remaining features. Models were also searched _via_ bidirectional stepwise selection using our groups's modeling workflow (the `Mattlab_modeling_v6.0.0.ipynb` Jupyter notebook hosted on [GitHub]([url](https://github.com/SigmanGroup/python-modeling))). 
+
+Combinations of features identified with these approaches were further evaluated _via_ a stratified 5×2 cross-validation scheme performed with the `5_2_CV.py` Python script, which was also written based on the code by Doyle _et al._<sup>4</sup> This script requires a `.xlsx` file with the data ("Class", ∆∆*G*<sup>‡</sup> values, and descriptors) and a `.txt` file with the specific combination of features as input (_e.g._, TSRE_xTB: η_Boltz, %Vbur_C1s_2.0Å_Boltz, %Vbur_C2s_4.0Å_Boltz if the sheet containing parameters extracted from **TSRE** is called TSRE_xTB). 
+
+The script `5_2_CV_ensemble.py` was used to post-process the output of the repeated, stratified, nested _k_-fold CV script and calculate ensemble predictions. This script may be executed as:
+
+```
+python 5_2_CV_ensemble.py file.out/xlsx Features.xlsx OOS.xlsx Output.xlsx
+```
+where `file.out` or `file.xlsx` contains the different MLR models (_i.e._, combinations of features) to evaluate in the 5×2 CV test, `Features.xlsx` contains the measured ∆∆*G*<sup>‡</sup> values and the descriptors (same format as in "Benchmarking"), and `OOS.xlsx` contains the data for out-of-sample predictions. As illustrative examples, `CH_Activation.out` and `Ni_XECs.out` are provided in the "Case_Study_2" folder, together with the `.xlsx` files with all the features.
+
+
+### SISSO-augmented features generation
+
+The Python code `SISSO_feature_generation.py` was used to calculate and filter the augmented features (see the Supporting Information for further details). It was written based on code priviously written by our group.<sup>14</sup> A `.xlsx`file with the same format as the input for `nested_CV.py` or `5_2_CV.py` is required.
+
+`calculate_SISSO_features.py` may be used to calculate the same SISSO-augmented features as those provided in a first input `.xlsx` file for a new set of parameters provided in a second `.xlsx` input (_e.g._, for virtual screening).
+
 
 ## References
 1. Ingman, V. M., Schaefer, A. J., Andreola, L. R. & Wheeler, S. E. QChASM: Quantum chemistry automation and structure manipulation. _WIREs Comput. Mol. Sci._ **11**, e1510 (2021).
@@ -441,5 +458,6 @@ Combinations of features identified with these approaches were further evaluated
 11. Haas, B. C.; Hardy, M. A.; Sowndarya S. V., S.; Adams, K.; Coley, C. W.; Paton, R. S.; Sigman, M. S. Rapid prediction of conformationally-dependent DFT-level descriptors using graph neural networks for carboxylic acids and alkyl amines. _Digit. Discov._ **4**, 222–233 (2025).
 12. Pollice, R.; Chen, P. A universal quantitative descriptor of the dispersion interaction potential. _Angew. Chem. Int. Ed._, **58**, 9758–9769 (2019).
 13. Kursa, M. & Rudnicki, W. Feature Selection with the Boruta Package. _J. Stat. Softw._ **36**, 1–13 (2010).
+14. Souza, L. W.; Miller, B. R.; Cammarota, R. C.; Lo, A.; Lopez, I.; Shiue, Y.-S.; Bergstrom, B. D.; Dishman, S. N.; Fettinger, J. C.; Sigman, M. S.; Shaw, J. T. Deconvoluting Nonlinear Catalyst–Substrate Effects in the Intramolecular Dirhodium-Catalyzed C–H Insertion of Donor/Donor Carbenes Using Data Science Tools. _ACS Catal._ **14**, 104–115 (2024).
 
 
