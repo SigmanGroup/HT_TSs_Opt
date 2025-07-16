@@ -434,7 +434,7 @@ The script `5_2_CV_ensemble.py` was used to post-process the output of the repea
 ```
 python 5_2_CV_ensemble.py file.out/xlsx Features.xlsx OOS.xlsx Output.xlsx
 ```
-where `file.out` or `file.xlsx` contains the different MLR models (_i.e._, combinations of features) to evaluate in the 5×2 CV test, `Features.xlsx` contains the measured ∆∆*G*<sup>‡</sup> values and the descriptors (same format as in "Benchmarking"), and `OOS.xlsx` contains the data for out-of-sample predictions. As illustrative examples, `CH_Activation.out` and `Ni_XECs.out` are provided in the "Case_Study_2" folder, together with the `.xlsx` files with all the features.
+where `file.out` or `file.xlsx` contains the different MLR models (_i.e._, combinations of features) to evaluate in the 5×2 CV test, `Features.xlsx` contains the measured ∆∆*G*<sup>‡</sup> values and the descriptors (same format as in "Benchmarking"), and `OOS.xlsx` contains the data for out-of-sample predictions. As illustrative examples, `CH_Activation.xlsx` and `Ni_XECs.out` are provided in the "Case_Study_2" folder, together with the `.xlsx` files with all the features.
 
 
 ### SISSO-augmented features generation
