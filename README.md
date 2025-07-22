@@ -1,5 +1,5 @@
 # High-Throughput Optimization and Featurization of TSs and Catalytic Cycle Intermediates
-This repository contains scripts for high-throughput generation, optimization, and featurization of TSs and catalytic cycle intermediates, along with scripts for MLR modeling and the Excel spreadsheets with input data.
+This repository contains scripts for high-throughput generation, optimization, and featurization of TSs and catalytic cycle intermediates, along with scripts for MLR modeling and the Excel spreadsheets with input data. This workflow refers to the [paper](https://chemrxiv.org/engage/chemrxiv/article-details/68788cb1728bf9025edbfa2f) deposited on ChemRxiv (DOI 10.26434/chemrxiv-2025-f5ddv). 
 
 ## Dependencies
 This workflow relies on published computational tools, including [AaronTools](https://aarontools.readthedocs.io/en/latest/index.html),<sup>1</sup> [Molassembler](https://github.com/qcscine/molassembler),<sup>2</sup> and [mARC](https://github.com/lcmd-epfl/marc).<sup>3</sup> See the links for detailed installation guides.
