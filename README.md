@@ -443,6 +443,9 @@ The Python code `SISSO_feature_generation.py` was used to calculate and filter t
 
 `calculate_SISSO_features.py` may be used to calculate the same SISSO-augmented features as those provided in a first input `.xlsx` file for a new set of parameters provided in a second `.xlsx` input (_e.g._, for virtual screening).
 
+## Step 9: Active Learning
+
+The `Case_Study_3.ipynb` Jupyter notebook (located in the "Step_9_Active_Learning" folder) was used in the active learning campaign within the EDBO+ platform<sup>15</sup> (installation instructions are provided [elsewhere](https://github.com/doyle-lab-ucla/edboplus)). `CCs_Acetals.xlsx` contains the input data required (in the `EDBO_Input` sheet), along with metadata regarding the ligand and substrates SMILES (`Metadata` sheet).
 
 ## References
 1. Ingman, V. M., Schaefer, A. J., Andreola, L. R. & Wheeler, S. E. QChASM: Quantum chemistry automation and structure manipulation. _WIREs Comput. Mol. Sci._ **11**, e1510 (2021).
@@ -459,5 +462,6 @@ The Python code `SISSO_feature_generation.py` was used to calculate and filter t
 12. Pollice, R.; Chen, P. A universal quantitative descriptor of the dispersion interaction potential. _Angew. Chem. Int. Ed._, **58**, 9758–9769 (2019).
 13. Kursa, M. & Rudnicki, W. Feature Selection with the Boruta Package. _J. Stat. Softw._ **36**, 1–13 (2010).
 14. Souza, L. W.; Miller, B. R.; Cammarota, R. C.; Lo, A.; Lopez, I.; Shiue, Y.-S.; Bergstrom, B. D.; Dishman, S. N.; Fettinger, J. C.; Sigman, M. S.; Shaw, J. T. Deconvoluting Nonlinear Catalyst–Substrate Effects in the Intramolecular Dirhodium-Catalyzed C–H Insertion of Donor/Donor Carbenes Using Data Science Tools. _ACS Catal._ **14**, 104–115 (2024).
+15. Torres J. A. G.; Lau S. H.; Anchuri P.; Stevens J. M.; Tabora J. E.; Li J.; Borovika A.; Adams R. P.; Doyle A. G. A Multi-Objective Active Learning Platform and Web App for Reaction Optimization. _J. Am. Chem. Soc._ **144**, 19999-20007 (2022).
 
 
