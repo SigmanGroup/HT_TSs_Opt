@@ -430,10 +430,10 @@ Details of the cross-validation scheme are provided in the Supporting Informatio
 As illustrative examples, the `Case_Study_2_CH_Functionalization.xlsx` and `Case_Study_2_Ni_XECs.xlsx` files are provided in the "Case_Study_2" folder, each containing an "Input" sheet with the data needed to run the `nested_CV.py` script; the "Metadata" sheet contains additional metadata. The script may be submitted as follows:
 
 ```
-python nested_CV.py input.xlsx oos.xlsx
+python nested_CV.py input.xlsx [oos.xlsx]
 ```
 
-where oos.xlsx is the spreadsheet containing the data for out-of-sample predictions (_e.g._, see the "OOS_Rxn_Metadata" sheet in the `Case_Study_2_Ni_XECs.xlsx` file; the `oos.xlsx` spreadsheet must contain the following columns: "Structure", "Class", "ee", and "DeltaDeltaG", followed by all the parameters).
+where oos.xlsx is an optional spreadsheet containing the data for out-of-sample predictions (_e.g._, see the "OOS_Rxn_Metadata" sheet in the `Case_Study_2_Ni_XECs.xlsx` file; the `oos.xlsx` spreadsheet must contain the following columns: "Structure", "Class", "ee", and "DeltaDeltaG", followed by all the parameters).
 
 Combinations of features identified with these approaches were further evaluated _via_ a stratified 5×2 cross-validation scheme performed with the `5_2_CV.py` Python script, which was also written based on the code by Doyle _et al._<sup>4</sup> This script requires a `.xlsx` file with the data ("Class", ∆∆*G*<sup>‡</sup> values, and descriptors) and a `.txt` file with the combinations of features to evaluate as input (_e.g._, TSRE_xTB: η_Boltz, %Vbur_C1s_2.0Å_Boltz, %Vbur_C2s_4.0Å_Boltz if the sheet containing parameters extracted from **TSRE** is called TSRE_xTB). 
 
