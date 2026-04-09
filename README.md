@@ -1,5 +1,5 @@
 # High-Throughput Optimization and Featurization of TSs and Catalytic Cycle Intermediates
-This repository contains scripts for high-throughput generation, optimization, and featurization of TSs and catalytic cycle intermediates, along with scripts for MLR and active learning modeling and the Excel spreadsheets with input data. This workflow refers to the [paper](https://www.nature.com/articles/s41586-026-10239-7) published in Nature (DOI 10.1038/s41586-026-10239-7). 
+This repository contains scripts for high-throughput generation, optimization, and featurization of TSs and catalytic cycle intermediates, along with scripts for MLR and active learning modeling and the Excel spreadsheets with input data. This workflow refers to this [paper](https://www.nature.com/articles/s41586-026-10239-7) published in *Nature* (DOI 10.1038/s41586-026-10239-7). 
 
 ## Dependencies
 This workflow relies on published computational tools, including [AaronTools](https://aarontools.readthedocs.io/en/latest/index.html),<sup>1</sup> [Molassembler](https://github.com/qcscine/molassembler),<sup>2</sup> and [mARC](https://github.com/lcmd-epfl/marc).<sup>3</sup> See the links for detailed installation guides.
